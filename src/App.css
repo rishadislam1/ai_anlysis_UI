@@ -1,0 +1,68 @@
+.sidebar {
+    width: 100px;
+    background-color: #001428;
+    height: 100vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+
+.logo {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nav-item.active {
+    border-left: 4px solid white;
+    background-color: #01213d;
+}
+
+.submenu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: #01213d;
+    padding: 10px;
+    z-index: 10;
+    min-width: 150px;
+}
+
+.submenu-item {
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.bottom-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+}
+
+.bottom-item.active {
+    border-left: 4px solid white;
+    background-color: #01213d;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: yellow;
+    margin-left: 5px;
+}
