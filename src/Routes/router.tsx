@@ -3,6 +3,7 @@ import App from "@/App.tsx";
 import DialougePage from "@/Pages/DialougePage.tsx";
 import DataSource from "@/Pages/DataSource.tsx";
 import SettingMenu from "@/Shared/SettingMenu.tsx";
+import Dashboard from "@/Pages/Dashboard.tsx";
 
 export const router = createBrowserRouter([
     {
@@ -15,7 +16,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/dashboards",
-                element: <div>s</div>
+                element: <Dashboard />
             },
             {
                 path: "/data_sources",
