@@ -3,48 +3,25 @@ import {useState, useEffect} from "react";
 import DashboardTable from "@/Components/DashboardComponent/DashboardTable.tsx";
 import {Button} from "antd";
 
-interface DataType {
-    key: string;
-    name: string;
-    createdBy?: string;
-    createdAt: string;
-    favourite: boolean;
-}
-
 const MenuComponent = () => {
     const navigate = useNavigate();
     const [selectedMenu, setSelectedMenu] = useState<string>("dashboards");
-    const [dataSource, setDataSource] = useState<DataType[]>([
-        {
-            key: '1',
-            name: 'Test',
-            createdBy: 'Munna',
-            createdAt: '15/07/25 23:42',
-            favourite: false
-        },
-        {
-            key: '2',
-            name: 'Test 2',
-            createdBy: 'Rahim',
-            createdAt: '15/07/25 23:45',
-            favourite: true
-        },
-    ]);
+
     const MenuItems = [
         {
             label: `All Dashboard`,
             key: 'dashboards',
-            content: <DashboardTable dataSource={dataSource} setDataSource={setDataSource}/>
+            content: <DashboardTable/>
         },
         {
             label: `My Dashboard`,
             key: 'dashboards?menu=my',
-            content: <DashboardTable dataSource={dataSource.filter(item => item?.createdBy==='Munna')} setDataSource={setDataSource}/>
+            content: <DashboardTable />
         },
         {
             label: `Favourites`,
             key: 'dashboards?menu=favorites',
-            content: <DashboardTable dataSource={dataSource.filter(item => item.favourite)} setDataSource={setDataSource}/>
+            content: <DashboardTable />
         },
     ]
 
@@ -64,7 +41,8 @@ const MenuComponent = () => {
                     <div className='space-y-4'>
                         <input
                             className='rounded-none bg-white w-full p-3 text-xs border-gray-500 hover:border-blue-400 focus:border-0'
-                            placeholder='Search Dashboard'/>
+                            placeholder='Search Dashboard'
+                        />
                         <div className='bg-white w-full shadow'>
                             {MenuItems.map((item, index) => {
                                 return (
