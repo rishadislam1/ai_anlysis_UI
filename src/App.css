@@ -66,3 +66,31 @@
     background-color: yellow;
     margin-left: 5px;
 }
+
+.ant-modal-content {
+    padding: 0 !important;
+}
+.ant-modal-content, .ant-modal-header {
+    border-radius: 0 !important;
+}
+.ant-modal-header {
+    border-bottom: 1px solid #e5e7eb !important;
+    padding: 16px 20px !important;
+    margin: 0 !important;
+}
+.ant-modal-body {
+    padding: 20px !important;
+    border-bottom: 1px solid #e5e7eb !important;
+}
+.ant-modal-footer {
+    padding: 10px 20px !important;
+    margin-top: 0 !important;
+}
+.ant-btn {
+    border-radius: 0 !important;
+    font-size: 12px !important;
+}
+.ant-input {
+    border-radius: 0 !important;
+    font-size: 12px !important;
+}
