@@ -17,6 +17,7 @@ import AccountSetting from "@/Pages/Account/AccountSetting.tsx";
 import DashboardDetailsPage from "@/Pages/Dashboard/DashboardDetailsPage.tsx";
 import DashboardListPage from "@/Pages/Dashboard/DashboardListPage.tsx";
 import DashboardsPrettify from "@/Pages/Dashboard/DashboardsPrettify.tsx";
+import HelpPage from "@/Pages/Help/HelpPage.tsx";
 
 export const router = createBrowserRouter([
     {
@@ -99,13 +100,16 @@ export const router = createBrowserRouter([
                         path: '/data_sources/upload/excel',
                         element: <DataSource/>
                     },
-                       {
+                    {
                         path: '/data_sources/settings/OpenKey',
                         element: <DataSource/>
-                    },
-
+                    }
                 ]
+            },
+            {
+                path: "/help",
+                element: <HelpPage />
             }
         ]
-    },
+    }
 ]);

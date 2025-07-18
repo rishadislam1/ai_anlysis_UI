@@ -109,7 +109,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({name, isEditable, onSa
                     <div className="flex items-center">
                         <Tooltip
                             placement="top"
-                            title={"Auto refreshing every " + refreshAfter}
+                            title={refreshAfter === "Disable auto refresh" ? "" : "Auto refreshing every " + refreshAfter}
                         >
                             <Button
                                 type={refreshAfter === "Disable auto refresh" ? "default" : "primary"}
