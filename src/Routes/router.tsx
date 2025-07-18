@@ -109,7 +109,7 @@ export const router = createBrowserRouter([
             {
                 path: "/help",
                 element: <HelpPage />
-            }
+            },
         ]
     }
 ]);
