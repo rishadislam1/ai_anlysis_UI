@@ -3,9 +3,7 @@ import App from "@/App.tsx";
 import DialougePage from "@/Pages/DialougePage.tsx";
 import DataSource from "@/Pages/DataSources/DataSource.tsx";
 import SettingMenu from "@/Shared/SettingMenu.tsx";
-import Dashboard from "@/Pages/Dashboard.tsx";
-import DashboardDetails from "@/Components/DashboardComponent/DashboardDetails.tsx";
-import Users from "@/Pages/Users/Users.tsx";
+// import Users from "@/Pages/Users/Users.tsx";
 import UserDetails from "@/Pages/Users/UserDetails.tsx";
 import DisableUsers from "@/Pages/Users/DisableUsers.tsx";
 import PendingInvitation from "@/Pages/Users/PendingInvitation.tsx";
@@ -16,6 +14,9 @@ import AlertDetails from "@/Pages/Alert/AlertDetails.tsx";
 import ReportSnippet from "@/Pages/Reports/ReportSnippet.tsx";
 import Organization from "@/Pages/Organization/Organization.tsx";
 import AccountSetting from "@/Pages/Account/AccountSetting.tsx";
+import DashboardDetailsPage from "@/Pages/Dashboard/DashboardDetailsPage.tsx";
+import DashboardListPage from "@/Pages/Dashboard/DashboardListPage.tsx";
+import DashboardsPrettify from "@/Pages/Dashboard/DashboardsPrettify.tsx";
 
 export const router = createBrowserRouter([
     {
@@ -28,11 +29,15 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/dashboards",
-                element: <Dashboard />
+                element: <DashboardListPage />,
             },
             {
                 path: "/dashboards/:name",
-                element: <DashboardDetails />
+                element: <DashboardDetailsPage />
+            },
+            {
+                path: "/dashboards_prettify",
+                element: <DashboardsPrettify />
             },
             {
                 path: "/data_sources",
@@ -44,7 +49,7 @@ export const router = createBrowserRouter([
                     },
                     {
                         path: '/data_sources/users',
-                        element: <Users/>
+                        // element: <Users/>
                     },
                     {
                         path: '/data_sources/users/:id',

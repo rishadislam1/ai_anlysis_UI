@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Button, Modal, Input, Form, Checkbox, message } from 'antd';
 import { SearchOutlined, DeleteOutlined, SaveOutlined } from '@ant-design/icons';
-import doris from "@/assets/doris.png";
-import mongoDb from "@/assets/mongodb.png";
-import mySQL from "@/assets/mysql.png";
-import pg from "@/assets/pg.png";
-import starrocks from "@/assets/starrocks.png";
+import doris from "@/assets/images/doris.png";
+import mongoDb from "@/assets/images/mongodb.png";
+import mySQL from "@/assets/images/mysql.png";
+import pg from "@/assets/images/pg.png";
+import starrocks from "@/assets/images/starrocks.png";
 import MySqlDataSource from "@/Components/DataSourceComponent/MySQLDataSource.tsx";
 import DorisDataSource from "@/Components/DataSourceComponent/DorisDataSource.tsx";
 import MongoDBDataSource from "@/Components/DataSourceComponent/MongoDBDataSource.tsx";

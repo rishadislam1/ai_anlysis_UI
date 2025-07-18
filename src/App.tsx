@@ -2,7 +2,7 @@ import './App.css';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { FaChartLine, FaCog, FaDesktop, FaGlobe, FaQuestionCircle, FaTachometerAlt } from 'react-icons/fa';
 import { type JSX, useState } from 'react';
-import logo from '@/assets/logo.png';
+import logo from '@/assets/images/logo.png';
 import { LuMessageCircleMore } from 'react-icons/lu';
 
 interface SubMenuItem {
