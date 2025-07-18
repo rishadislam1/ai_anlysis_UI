@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Drawer, Button, Modal, message } from "antd";
-import prettifyDashboard1 from "@/assets/images/dashboards_prettify_1.jpg";
-import prettifyDashboard2 from "@/assets/images/dashboards_prettify_2.jpg";
-import prettifyDashboard3 from "@/assets/images/dashboards_prettify_3.jpg";
+import prettifyDashboard1 from "@/assets/images/dashboard/dashboards_prettify_1.jpg";
+import prettifyDashboard2 from "@/assets/images/dashboard/dashboards_prettify_2.jpg";
+import prettifyDashboard3 from "@/assets/images/dashboard/dashboards_prettify_3.jpg";
 
 interface PrettifyDashboardDrawerProps {
     isOpen: boolean;
