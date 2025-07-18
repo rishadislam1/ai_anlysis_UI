@@ -5,14 +5,14 @@ import { EllipsisOutlined } from '@ant-design/icons';
 
 const menuItems = [
     { name: 'Data Sources', path: '/data_sources' },
-    { name: 'Account', path: '/users' },
-    { name: 'Groups', path: '/groups' },
-    { name: 'Alert setting', path: '/destinations' },
-    { name: 'Report Snippet', path: '/query_snippets' },
-    { name: 'Organization Settings', path: '/settings/general' },
-    { name: 'Account Setting', path: '/users/me' },
-    { name: 'CSV Data Source', path: '/upload/excel' },
-    { name: 'API Key', path: '/settings/OpenKey' },
+    { name: 'Account', path: '/data_sources/users' },
+    { name: 'Groups', path: '/data_sources/groups' },
+    { name: 'Alert setting', path: '/data_sources/destinations' },
+    { name: 'Report Snippet', path: '/data_sources/query_snippets' },
+    { name: 'Organization Settings', path: '/data_sources/settings/general' },
+    { name: 'Account Setting', path: '/data_sources/users/me' },
+    { name: 'CSV Data Source', path: '/data_sources/upload/excel' },
+    { name: 'API Key', path: '/data_sources/settings/OpenKey' },
 ];
 
 const SettingMenu = () => {
@@ -107,7 +107,7 @@ const SettingMenu = () => {
                     </div>
 
                 </div>
-                <div className={`m-5`}>
+                <div className={`m-5 pb-10`}>
                     <Outlet/>
                 </div>
             </div>
