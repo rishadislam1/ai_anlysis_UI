@@ -1,31 +1,35 @@
 import {Responsive, WidthProvider} from 'react-grid-layout';
-
-import {useParams} from 'react-router-dom';
+import {Link, useNavigate, useParams} from 'react-router-dom';
 import {dashboardStore} from "@/store/dashboard_store.ts";
-import 'react-grid-layout/css/styles.css';
-import 'react-resizable/css/styles.css';
-import "./DashboardDetails.css";
-import {Button, Modal, Tooltip} from "antd";
+import {Button, Dropdown, type MenuProps, Modal, Tooltip} from "antd";
 import {FaCheck} from "react-icons/fa";
-import {MdWidgets} from "react-icons/md";
+import {MdFullscreen, MdWidgets} from "react-icons/md";
 import {useState} from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-
-const ResponsiveGridLayout = WidthProvider(Responsive);
+import {SlOptionsVertical} from "react-icons/sl";
+import {IoIosArrowDown, IoMdShare} from "react-icons/io";
+import {FaWandMagicSparkles} from "react-icons/fa6";
+import {LuRefreshCw} from "react-icons/lu";
+import 'react-grid-layout/css/styles.css';
+import 'react-resizable/css/styles.css';
+import "./DashboardDetails.css";
+import avatar from "@/assets/gravatar.png"; // Import avatar image
 
 const DashboardDetails = () => {
+    const [modal, contextHolder] = Modal.useModal(); // Initialize useModal
+    const ResponsiveGridLayout = WidthProvider(Responsive);
     const {name} = useParams<string>();
-    const {dashboardData, handleToggleFavourite} = dashboardStore();
+    const {dashboardData, handleToggleFavourite, textWidget, setTextWidget} = dashboardStore();
     const [isTextModalOpen, setIsTextModalOpen] = useState(false);
     const [selectedTextWidget, setSelectedTextWidget] = useState<string>('');
+    const queryParams = new URLSearchParams(location.search);
+    const isEditable = queryParams.get("edit") === "";
+    const navigate = useNavigate();
 
     const layout = [
         {i: '1', x: 0, y: 0, w: 2, h: 2},
-        {i: '2', x: 2, y: 0, w: 2, h: 2},
-        {i: '3', x: 4, y: 0, w: 2, h: 2},
     ];
-    const [textWidget, setTextWidget] = useState<string[]>([]);
 
     const handleSave = () => {
         setIsTextModalOpen(false);
@@ -38,22 +42,77 @@ const DashboardDetails = () => {
         setTextWidget(arr);
     }
 
+    const handleArchive = () => {
+        modal.confirm({
+            title: 'Archive Dashboard',
+            content: `Are you sure? "${name}" Archive Dashboard`,
+            okText: 'Yes'
+        });
+    };
+
+    const EditItems: MenuProps['items'] = [
+        {
+            label: (
+                <Link to={`/dashboards/${name}?edit`}>
+                    Edit
+                </Link>
+            ),
+            key: '0',
+        },
+        {
+            label: 'Draft',
+            key: '1',
+            onClick: () => console.log("Draft saved!")
+        },
+        {
+            label: 'Archive',
+            key: '2',
+            onClick: handleArchive,
+        },
+    ];
+
     return (
         <div>
+            {contextHolder}
             <div className='mb-2 flex justify-between items-center'>
-                <h1 className="text-2xl">
+                <div className="text-2xl flex items-center space-x-1">
                     <span
-                        className={`text-${dashboardData?.favourite ? 'yellow' : 'gray'}-500 cursor-pointer me-2`}
+                        className={`text-${dashboardData?.is_favorite ? 'yellow' : 'gray'}-500 cursor-pointer me-2`}
                         onClick={() => handleToggleFavourite(dashboardData)}
                     >
-                        {dashboardData?.favourite ? '★' : '☆'}
+                        {dashboardData?.is_favorite ? '★' : '☆'}
                     </span>
-                    {name}
-                </h1>
-                <Button type='primary' style={{borderRadius: 0}} className='align-middle'><FaCheck/> Save</Button>
+                    <h1>{name}</h1>
+                    <img src={avatar} title='Munna' alt='avatar' width={16} />
+                </div>
+                {
+                    isEditable
+                        ? <>
+                            <Button onClick={() => navigate(`/dashboards/${name}`)} type='primary' style={{borderRadius: 0}} className='align-middle'><FaCheck/> Save</Button>
+                        </>
+                        : <div className='flex items-center space-x-1 '>
+                            <Button><FaWandMagicSparkles /> Prettify Dashboard</Button>
+                            <div className='flex items-center'>
+                                <Button><LuRefreshCw /> Refresh</Button>
+                                <Button style={{padding: '0px 10px'}}><IoIosArrowDown /></Button>
+                            </div>
+
+                            <Button onClick={() => {
+                                modal.confirm({
+                                    title: 'Confirm',
+                                    content: 'Bla bla ...',
+                                });
+                            }} style={{padding: '0px 10px'}}><MdFullscreen /></Button>
+                            <Button style={{padding: '0px 10px'}}><IoMdShare /></Button>
+                            <Dropdown menu={{ items: EditItems }} trigger={['click']}>
+                                <Button style={{padding: '0px 10px'}}><SlOptionsVertical /></Button>
+                            </Dropdown>
+                        </div>
+                }
+
             </div>
 
-            <div className="grid-wrapper">
+            <div className={isEditable ? "grid-wrapper" : ""}>
                 <ResponsiveGridLayout
                     className="layout"
                     layouts={{lg: layout}}
@@ -62,8 +121,8 @@ const DashboardDetails = () => {
                     rowHeight={50}
                     margin={[10, 10]}                  // spacing between items
                     containerPadding={[4, 4]}       // spacing on grid edges
-                    isResizable={true}
-                    isDraggable={true}
+                    isResizable={isEditable}
+                    isDraggable={isEditable}
                     compactType={null}
                     preventCollision={true}
                     resizeHandles={['se']}
@@ -75,16 +134,17 @@ const DashboardDetails = () => {
                 </ResponsiveGridLayout>
             </div>
 
-            <div className="card flex justify-between items-center text-sm fixed bottom-5 right-5 left-30 p-3">
+            {isEditable && <div className="card flex justify-between items-center text-sm fixed bottom-5 right-5 left-30 p-3">
                 <div className="flex items-center space-x-2">
                     <MdWidgets size={25}/>
-                    <p>Widgets are individual report visualizations or text boxes you can place on your dashboard in various arrangements</p>
+                    <p>Widgets are individual report visualizations or text boxes you can place on your dashboard in
+                        various arrangements</p>
                 </div>
                 <div className="flex items-center space-x-2">
                     <Button onClick={() => setIsTextModalOpen(true)} style={{borderRadius: '0px'}}>Add Text</Button>
                     <Button type={'primary'} style={{borderRadius: '0px'}} className={'font-light'}>Add Widget</Button>
                 </div>
-            </div>
+            </div>}
 
             <Modal
                 title="Add Text"

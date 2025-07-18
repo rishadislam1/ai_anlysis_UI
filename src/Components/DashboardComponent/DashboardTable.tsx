@@ -4,26 +4,64 @@ import moment from "moment";
 import {useNavigate} from "react-router-dom";
 import {dashboardStore} from "@/store/dashboard_store.ts";
 
-// Define the data type for the table
+interface Widget {
+    id: number;
+    width: number;
+    options: {
+        isHidden: boolean;
+        position: {
+            autoHeight: boolean;
+            sizeX: number;
+            sizeY: number;
+            minSizeX: number;
+            maxSizeX: number;
+            minSizeY: number;
+            maxSizeY: number;
+            col: number;
+            row: number;
+        };
+        parameterMappings: Record<string, unknown>;
+    };
+    dashboard_id: number;
+    text: string;
+    updated_at: string;
+    created_at: string;
+}
 interface DataType {
-    key: string;
+    id: number;
+    slug: string;
     name: string;
-    createdBy?: string;
-    createdAt: string;
-    favourite: boolean;
+    user_id: number;
+    user: {
+        id: number;
+        name: string;
+        email: string;
+        profile_image_url: string;
+    };
+    layout: unknown[];
+    dashboard_filters_enabled: boolean;
+    widgets: Widget[];
+    options: Record<string, unknown>;
+    is_archived: boolean;
+    is_draft: boolean;
+    tags: string[];
+    updated_at: string;
+    created_at: string;
+    version: number;
+    is_favorite: boolean;
+    can_edit: boolean;
 }
 
-// Component without redundant props, using store directly
 const DashboardTable: React.FC = () => {
     const navigate = useNavigate();
     const {dashboardDataList, setDashboardDataList, setDashboardData} = dashboardStore();
     const queryParams = new URLSearchParams(location.search);
     const menuFilter = queryParams.get("menu");
 
-    const handleToggleFavourite = (key: string) => {
+    const handleToggleFavourite = (key: number) => {
         setDashboardDataList((prev) =>
             prev.map((item: DataType) =>
-                item.key === key ? {...item, favourite: !item.favourite} : item
+                item.id === key ? {...item, is_favorite: !item.is_favorite} : item
             )
         );
     };
@@ -32,14 +70,14 @@ const DashboardTable: React.FC = () => {
         {
             render: (_: string, record: DataType) => (
                 <span
-                    className={`text-${record.favourite ? "red" : "gray"}-500 cursor-pointer`}
-                    onClick={() => handleToggleFavourite(record.key)}
+                    className={`text-${record.is_favorite ? "red" : "gray"}-500 cursor-pointer`}
+                    onClick={() => handleToggleFavourite(record.id)}
                 >
-          {record.favourite ? "★" : "☆"}
+          {record.is_favorite ? "★" : "☆"}
         </span>
             ),
-            dataIndex: "favourite",
-            key: "favourite",
+            dataIndex: "is_favorite",
+            key: "is_favorite",
             width: 10,
         },
         {
@@ -69,8 +107,8 @@ const DashboardTable: React.FC = () => {
             dataIndex: "createdAt",
             key: "createdAt",
             sorter: (a: DataType, b: DataType) =>
-                moment(a.createdAt, "YY/MM/DD HH:mm").valueOf() -
-                moment(b.createdAt, "YY/MM/DD HH:mm").valueOf(),
+                moment(a.created_at, "YY/MM/DD HH:mm").valueOf() -
+                moment(b.created_at, "YY/MM/DD HH:mm").valueOf(),
             width: 120,
             className: "text-gray-500 text-xs",
         },
@@ -78,7 +116,7 @@ const DashboardTable: React.FC = () => {
 
     return (
         <Table
-            dataSource={dashboardDataList.filter((item: DataType) => menuFilter === "my" ? item.createdBy === "Munna" : menuFilter === "favorites" ? item.favourite : true)}
+            dataSource={dashboardDataList.filter((item: DataType) => menuFilter === "my" ? item.user.name === "Munna" : menuFilter === "favorites" ? item.is_favorite : true)}
             columns={columns}
             size="middle"
         />
