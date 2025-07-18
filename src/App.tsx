@@ -192,7 +192,7 @@ function App() {
                                     backgroundColor: isActive ? '#01213d' : 'transparent',
                                 }}
                             >
-                                <div
+                                <Link to={`${item.path}`}
                                     style={{
                                         display: 'flex',
                                         flexDirection: 'column',
@@ -222,7 +222,7 @@ function App() {
                                             }}
                                         />
                                     )}
-                                </div>
+                                </Link>
 
                                 {item.subMenu && activeSubMenu === item.label && (
                                     <div
