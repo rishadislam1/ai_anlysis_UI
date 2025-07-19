@@ -1,7 +1,7 @@
 import Select, {type StylesConfig, type SingleValue } from 'react-select';
 import { Link } from 'react-router-dom';
 import { CiCircleQuestion } from 'react-icons/ci';
-import csv from '@/assets/csv.png';
+import csv from '@/assets/images/csv.png';
 import NoDataFound from '@/Components/NoDataFound.tsx';
 import { useState, type ChangeEvent } from 'react';
 import useAxiosSecure from '@/hooks/useAxiosSecure.tsx';

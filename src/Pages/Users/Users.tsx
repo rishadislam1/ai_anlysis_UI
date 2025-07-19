@@ -149,7 +149,7 @@ const Users = () => {
 
 
   return (
-    <div className="flex h-screen bg-white font-sans">
+    <div className="flex bg-white font-sans">
       {/* Sidebar */}
       <div className="w-64 border-r border-gray-200 p-4 flex flex-col">
         <Button type="primary" className="mb-4 bg-blue-500 hover:bg-blue-600" onClick={showModal}>+ Create by</Button>

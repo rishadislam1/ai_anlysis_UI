@@ -1,6 +1,6 @@
 import {createBrowserRouter} from "react-router-dom";
 import App from "@/App.tsx";
-import DialougePage from "@/Pages/DialougePage.tsx";
+
 import DataSource from "@/Pages/DataSources/DataSource.tsx";
 import SettingMenu from "@/Shared/SettingMenu.tsx";
 import Users from "@/Pages/Users/Users.tsx";
@@ -18,6 +18,19 @@ import DashboardDetailsPage from "@/Pages/Dashboard/DashboardDetailsPage.tsx";
 import DashboardListPage from "@/Pages/Dashboard/DashboardListPage.tsx";
 import DashboardsPrettify from "@/Pages/Dashboard/DashboardsPrettify.tsx";
 import HelpPage from "@/Pages/Help/HelpPage.tsx";
+import DialougePage from "@/Pages/Dialouge/DialougePage.tsx";
+import DialougeHistory from "@/Pages/Dialouge/DialougeHistory.tsx";
+import ReportGenerate from "@/Pages/QueryBuilder/ReportGenerate.tsx";
+import DataAutopilot from "@/Pages/DataAutopilot/DataAutopilot.tsx";
+import HistoryAutopilot from "@/Pages/DataAutopilot/HistoryAutopilot.tsx";
+import AdminStatus from "@/Pages/Settings/AdminStatus.tsx";
+import UploadExcel from "@/Pages/ExcelUpload/UploadExcel.tsx";
+import ApiKey from "@/Pages/APIKey/APIKey.tsx";
+import ReportList from "@/Pages/QueryBuilder/ReportList.tsx";
+import NewReport from "@/Pages/QueryBuilder/NewReport.tsx";
+import MyReport from "@/Pages/QueryBuilder/MyReport.tsx";
+import FavouriteReport from "@/Pages/QueryBuilder/FavouriteReport.tsx";
+import ArchiveReport from "@/Pages/QueryBuilder/ArchiveReport.tsx";
 
 export const router = createBrowserRouter([
     {
@@ -30,20 +43,20 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/dashboards",
-                element: <DashboardListPage />,
+                element: <DashboardListPage/>,
             },
             {
                 path: "/dashboards/:name",
-                element: <DashboardDetailsPage />
+                element: <DashboardDetailsPage/>
             },
             {
                 path: "/dashboards_prettify",
-                element: <DashboardsPrettify />
+                element: <DashboardsPrettify/>
             },
             {
                 path: "/data_sources",
                 element: <SettingMenu/>,
-                children:[
+                children: [
                     {
                         path: '/data_sources',
                         element: <DataSource/>
@@ -96,20 +109,66 @@ export const router = createBrowserRouter([
                         path: '/data_sources/users/me',
                         element: <AccountSetting/>
                     },
+
                     {
                         path: '/data_sources/upload/excel',
-                        element: <DataSource/>
+                        element: <UploadExcel/>
                     },
-                       {
+                    {
                         path: '/data_sources/settings/OpenKey',
-                        element: <DataSource/>
-                    }
+                        element: <ApiKey/>
+                    },
                 ]
             },
             {
                 path: "/help",
-                element: <HelpPage />
+                element: <HelpPage/>
             },
+            {
+                path: '/copilot/history',
+                element: <DialougeHistory/>
+            },
+            {
+                path: '/report-route',
+                element: <ReportGenerate/>
+            },
+            {
+                path: '/autopilot',
+                element: <DataAutopilot/>
+            },
+            {
+                path: '/autopilot_list',
+                element: <HistoryAutopilot/>
+            },
+            {
+                path: '/admin/status',
+                element: <AdminStatus/>
+            },
+            {
+                path: '/queries',
+                element: <ReportList/>,
+
+            },
+            {
+                path: '/reports/my',
+                element: <MyReport/>,
+
+            },
+            {
+                path: '/reports/archived',
+                element: <ArchiveReport/>,
+
+            },
+            {
+                path: '/reports/favorites',
+                element: <FavouriteReport/>,
+
+            },
+            {
+                path: '/queries/new',
+                element: <NewReport/>
+            },
+
         ]
     }
 ]);
