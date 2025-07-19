@@ -1,8 +1,8 @@
 import React from "react";
-import {Button, Table} from "antd";
+import { Button, Table } from "antd";
 import moment from "moment";
-import {useNavigate} from "react-router-dom";
-import {dashboardStore} from "@/store/dashboard_store.ts";
+import { useNavigate } from "react-router-dom";
+import { dashboardStore } from "@/store/dashboard_store.ts";
 
 interface Widget {
     id: number;
@@ -27,6 +27,7 @@ interface Widget {
     updated_at: string;
     created_at: string;
 }
+
 interface DataType {
     id: number;
     slug: string;
@@ -52,16 +53,20 @@ interface DataType {
     can_edit: boolean;
 }
 
-const DashboardTable: React.FC = () => {
+interface DashboardTableProps {
+    searchDashboard?: string;
+}
+
+const DashboardTable: React.FC<DashboardTableProps> = ({searchDashboard}) => {
     const navigate = useNavigate();
-    const {dashboardDataList, setDashboardDataList, setDashboardData} = dashboardStore();
+    const { dashboardDataList, setDashboardDataList, setDashboardData } = dashboardStore();
     const queryParams = new URLSearchParams(location.search);
     const menuFilter = queryParams.get("menu");
 
     const handleToggleFavourite = (key: number) => {
         setDashboardDataList((prev) =>
             prev.map((item: DataType) =>
-                item.id === key ? {...item, is_favorite: !item.is_favorite} : item
+                item.id === key ? { ...item, is_favorite: !item.is_favorite } : item
             )
         );
     };
@@ -70,7 +75,9 @@ const DashboardTable: React.FC = () => {
         {
             render: (_: string, record: DataType) => (
                 <span
-                    className={`text-${record.is_favorite ? "red" : "gray"}-500 cursor-pointer`}
+                    className={`text-${
+                        record.is_favorite ? "red" : "gray"
+                    }-500 cursor-pointer`}
                     onClick={() => handleToggleFavourite(record.id)}
                 >
           {record.is_favorite ? "★" : "☆"}
@@ -87,36 +94,47 @@ const DashboardTable: React.FC = () => {
             className: "text-blue-500 text-xs",
             sorter: (a: DataType, b: DataType) => (a.name > b.name ? 1 : -1),
             render: (text: string, record: DataType) => (
-                <Button onClick={() => {
-                    setDashboardData(record);
-                    navigate(text.replace(" ", "_"));
-                }} type="link">
+                <Button
+                    onClick={() => {
+                        setDashboardData(record);
+                        navigate(record.id+"-"+ text.replace(" ", "_"));
+                    }}
+                    type="link"
+                >
                     {text}
                 </Button>
             ),
         },
         {
             title: "Created By",
-            dataIndex: "createdBy",
+            dataIndex: "user",
             key: "createdBy",
             width: 100,
             className: "text-gray-500 text-xs",
+            render: (user: DataType["user"]) => user.name,
         },
         {
             title: "Created At",
-            dataIndex: "createdAt",
+            dataIndex: "created_at",
             key: "createdAt",
             sorter: (a: DataType, b: DataType) =>
                 moment(a.created_at, "YY/MM/DD HH:mm").valueOf() -
                 moment(b.created_at, "YY/MM/DD HH:mm").valueOf(),
             width: 120,
             className: "text-gray-500 text-xs",
+            render: (text: string) => moment(text).format("YY/MM/DD HH:mm"),
         },
     ];
 
     return (
         <Table
-            dataSource={dashboardDataList.filter((item: DataType) => menuFilter === "my" ? item.user.name === "Munna" : menuFilter === "favorites" ? item.is_favorite : true)}
+            dataSource={dashboardDataList.filter(item => searchDashboard === "" || item.name.toLowerCase().includes(searchDashboard?.toLowerCase() || '')).filter((item: DataType) =>
+                menuFilter === "my"
+                    ? item.user.name === "Munna"
+                    : menuFilter === "favorites"
+                        ? item.is_favorite
+                        : true
+            )}
             columns={columns}
             size="middle"
         />
