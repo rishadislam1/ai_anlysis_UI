@@ -119,7 +119,7 @@ function App() {
             subMenu: [
                 { path: '/data_sources/users/me', label: 'Account Setting' },
                 { path: '/admin/status', label: 'System Status' },
-                { path: '/logout', label: 'Logout' },
+                { path: '/login', label: 'Logout' },
                 { path: '', label: 'Version: 2.0.3 (dev)' },
             ],
         },

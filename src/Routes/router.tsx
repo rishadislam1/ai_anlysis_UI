@@ -31,6 +31,7 @@ import NewReport from "@/Pages/QueryBuilder/NewReport.tsx";
 import MyReport from "@/Pages/QueryBuilder/MyReport.tsx";
 import FavouriteReport from "@/Pages/QueryBuilder/FavouriteReport.tsx";
 import ArchiveReport from "@/Pages/QueryBuilder/ArchiveReport.tsx";
+import Login from "@/Pages/Login.tsx";
 
 export const router = createBrowserRouter([
     {
@@ -169,6 +170,11 @@ export const router = createBrowserRouter([
                 element: <NewReport/>
             },
 
+
         ]
-    }
+    },
+    {
+        path: '/login',
+        element: <Login/>
+    },
 ]);
