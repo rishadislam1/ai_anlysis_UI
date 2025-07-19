@@ -2,9 +2,9 @@ import Select, {type StylesConfig, type SingleValue } from 'react-select';
 import { Link } from 'react-router-dom';
 import { CiCircleQuestion } from 'react-icons/ci';
 import csv from '@/assets/csv.png';
-import NoDataFound from '@/Components/NoDataFound';
+import NoDataFound from '@/Components/NoDataFound.tsx';
 import { useState, type ChangeEvent } from 'react';
-import useAxiosSecure from '@/hooks/useAxiosSecure';
+import useAxiosSecure from '@/hooks/useAxiosSecure.tsx';
 import { AxiosError } from 'axios';
 import {IoMdSend} from "react-icons/io";
 
@@ -82,7 +82,7 @@ const formatOptionLabel = ({ label, icon }: OptionType) => (
     </div>
 );
 
-const DialougePage = () => {
+const DataAutopilot = () => {
     // Define data sources
     const dataSources: OptionType[] = [
         {
@@ -289,4 +289,5 @@ const DialougePage = () => {
     );
 };
 
-export default DialougePage;
+export default DataAutopilot;
+

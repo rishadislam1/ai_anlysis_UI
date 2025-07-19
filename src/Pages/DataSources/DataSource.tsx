@@ -131,12 +131,17 @@ const DataSource = () => {
         <div>
             {!dataSource ? (
                 <>
-                    <button className="bg-blue-500 text-white p-2 cursor-pointer font-bold rounded text-sm" onClick={showModal}>
+                    <button className="bg-blue-500 text-white p-2 cursor-pointer font-bold rounded text-sm" onClick={showModal} style={{
+                        color: "white"
+                    }}>
                         + New Data Source
                     </button>
                     <div className="flex flex-col justify-center items-center gap-2 mt-4 text-center">
                         <p>There are no data sources yet.</p>
-                        <button onClick={showModal} className="text-blue-500 cursor-pointer">
+                        <button onClick={showModal} className="text-blue-500 cursor-pointer" style={{
+                            color: "#417fff",
+                            fontWeight: "600"
+                        }}>
                             Connect a Data Source
                         </button>
                     </div>

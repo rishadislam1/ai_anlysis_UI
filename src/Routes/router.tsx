@@ -1,6 +1,6 @@
 import {createBrowserRouter} from "react-router-dom";
 import App from "@/App.tsx";
-import DialougePage from "@/Pages/DialougePage.tsx";
+import DialougePage from "@/Pages/Dialouge/DialougePage.tsx";
 import DataSource from "@/Pages/DataSources/DataSource.tsx";
 import SettingMenu from "@/Shared/SettingMenu.tsx";
 import Dashboard from "@/Pages/Dashboard.tsx";
@@ -16,6 +16,13 @@ import AlertDetails from "@/Pages/Alert/AlertDetails.tsx";
 import ReportSnippet from "@/Pages/Reports/ReportSnippet.tsx";
 import Organization from "@/Pages/Organization/Organization.tsx";
 import AccountSetting from "@/Pages/Account/AccountSetting.tsx";
+import UploadExcel from "@/Pages/ExcelUpload/UploadExcel.tsx";
+import ApiKey from "@/Pages/APIKey/APIKey.tsx";
+import DialougeHistory from "@/Pages/Dialouge/DialougeHistory.tsx";
+import ReportGenerate from "@/Pages/QueryBuilder/ReportGenerate.tsx";
+import DataAutopilot from "@/Pages/DataAutopilot/DataAutopilot.tsx";
+import HistoryAutopilot from "@/Pages/DataAutopilot/HistoryAutopilot.tsx";
+import AdminStatus from "@/Pages/Settings/AdminStatus.tsx";
 
 export const router = createBrowserRouter([
     {
@@ -28,16 +35,16 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/dashboards",
-                element: <Dashboard />
+                element: <Dashboard/>
             },
             {
                 path: "/dashboards/:name",
-                element: <DashboardDetails />
+                element: <DashboardDetails/>
             },
             {
                 path: "/data_sources",
                 element: <SettingMenu/>,
-                children:[
+                children: [
                     {
                         path: '/data_sources',
                         element: <DataSource/>
@@ -92,15 +99,37 @@ export const router = createBrowserRouter([
                     },
                     {
                         path: '/data_sources/upload/excel',
-                        element: <DataSource/>
+                        element: <UploadExcel/>
                     },
-                       {
+                    {
                         path: '/data_sources/settings/OpenKey',
-                        element: <DataSource/>
+                        element: <ApiKey/>
                     },
 
+
+
                 ]
-            }
+            },
+            {
+                path: '/copilot/history',
+                element: <DialougeHistory/>
+            },
+            {
+                path: '/report-route',
+                element: <ReportGenerate/>
+            },
+            {
+                path: '/autopilot',
+                element: <DataAutopilot/>
+            },
+            {
+                path: '/autopilot_list',
+                element: <HistoryAutopilot/>
+            },
+            {
+                path: '/admin/status',
+                element: <AdminStatus/>
+            },
         ]
     },
 ]);
