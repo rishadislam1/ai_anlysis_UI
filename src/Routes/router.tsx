@@ -3,7 +3,7 @@ import App from "@/App.tsx";
 import DialougePage from "@/Pages/DialougePage.tsx";
 import DataSource from "@/Pages/DataSources/DataSource.tsx";
 import SettingMenu from "@/Shared/SettingMenu.tsx";
-// import Users from "@/Pages/Users/Users.tsx";
+import Users from "@/Pages/Users/Users.tsx";
 import UserDetails from "@/Pages/Users/UserDetails.tsx";
 import DisableUsers from "@/Pages/Users/DisableUsers.tsx";
 import PendingInvitation from "@/Pages/Users/PendingInvitation.tsx";
@@ -50,7 +50,7 @@ export const router = createBrowserRouter([
                     },
                     {
                         path: '/data_sources/users',
-                        // element: <Users/>
+                        element: <Users/>
                     },
                     {
                         path: '/data_sources/users/:id',
